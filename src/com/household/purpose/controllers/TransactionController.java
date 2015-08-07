@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.household.purpose.models.Transaction;
-import com.household.purpose.services.PersistingService;
+import com.household.purpose.services.TransactionService;
 
 @Controller
 @RequestMapping(value="/transactions")
 public class TransactionController {
 
-	private PersistingService service;
+	private TransactionService service;
 	
-	public TransactionController(PersistingService service) {
+	public TransactionController(TransactionService service) {
 		this.service = service;
 	}
 	
 	@RequestMapping(value="/fetchAll", method=RequestMethod.GET) 
-	public ResponseEntity<List<Object>> fetchAllTransactions() {
-		List<Object> transactions = service.fetchAll();
+	public ResponseEntity<List<Transaction>> fetchAllTransactions() {
+		List<Transaction> transactions = service.fetchAll();
 		if(transactions != null && transactions.size() >0) {
-			return new ResponseEntity<List<Object>>(transactions, HttpStatus.OK);
+			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<List<Object>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Transaction>>(HttpStatus.NOT_FOUND);
 		}
 	}
 	

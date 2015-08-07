@@ -34,6 +34,9 @@
 		<servlet>3.0.1</servlet>
 		<jsonpath>2.0.0</jsonpath>
 		<hateoas>0.17.0.RELEASE</hateoas>
+		<h2db>1.4.187</h2db>
+		<hibernate>4.3.10.Final</hibernate>
+		<dbcp2>2.1</dbcp2>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -58,6 +61,27 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+		
+		<!-- persistance layer -->
+		<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2db}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${dbcp2}</version>
+        </dependency>
 		
 		<!-- json dependencies -->
 		<dependency>

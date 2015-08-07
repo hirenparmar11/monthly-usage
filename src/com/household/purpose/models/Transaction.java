@@ -2,8 +2,14 @@ package com.household.purpose.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Transaction {
 
+	@Id @GeneratedValue
 	private Long transactionId;
 	private Long timestamp;
 	private PaymentMethod payment;

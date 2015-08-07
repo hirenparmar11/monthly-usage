@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.household.purpose.models.PaymentMethod;
 import com.household.purpose.models.PaymentMethod.PaymentType;
 import com.household.purpose.models.Transaction;
-import com.household.purpose.services.PersistingService;
+import com.household.purpose.services.TransactionService;
 
 public class TransactionControllerTest {
 	
@@ -31,15 +31,15 @@ public class TransactionControllerTest {
 	private TransactionController controller;
 	
 	@Mock
-	private PersistingService service;
+	private TransactionService service;
 	
 	public TransactionControllerTest() {
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 	
-	public Map<Long, Object> dummyTransactions() {
-		Map<Long, Object> transactions = new HashMap<Long, Object>();
+	public Map<Long, Transaction> dummyTransactions() {
+		Map<Long, Transaction> transactions = new HashMap<Long, Transaction>();
 		
 		Transaction t1 = new Transaction();
 		PaymentMethod m1 = new PaymentMethod();
@@ -88,7 +88,7 @@ public class TransactionControllerTest {
 	@Test
 	public void testFetchAllTransactions() throws Exception {
 				
-		Mockito.when(service.fetchAll()).thenReturn(new ArrayList<Object>(dummyTransactions().values()));
+		Mockito.when(service.fetchAll()).thenReturn(new ArrayList<Transaction>(dummyTransactions().values()));
 		
 		mockMvc.perform(MockMvcRequestBuilders.get("/transactions/fetchAll"))
 			.andExpect(MockMvcResultMatchers.jsonPath("$.[0].transactionId", Matchers.is(1)))
